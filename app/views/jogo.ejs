@@ -15,7 +15,8 @@
 		<link href="css/style.css" rel="stylesheet">
 
 		<script>
-			$(document).ready( function(){
+
+			$(document).ready(function(){
 
 				$('#btn_sair').click(function(){
 					window.location.href = '/sair';
@@ -26,7 +27,7 @@
 
 					$.ajax({
 						url: '/suditos',
-						method: "get",
+						method: 'get',
 						success: function(data){
 							$('#acoes').html(data);
 						}
@@ -38,11 +39,10 @@
 					
 					$.ajax({
 						url: '/pergaminhos',
-						method: "get",
+						method: 'get',
 						success: function(data){
 							$('#acoes').html(data);
-
-							clearTimeout(timerId);
+							clearInterval(timerId);
 							cronometro();
 						}
 					});
@@ -53,20 +53,18 @@
 			var timerId = null;
 
 			function cronometro(){
-				
 				$('.tempo_restante').each(function(){
 					var segundos = $(this).html();
 					var segundos_atuais = parseInt(segundos) - 1;
-
 					if(segundos_atuais < 0){
-						window.location.href= "/jogo?msg=C";
-					} else {
-						$(this).html(segundos_atuais);
+						window.location.href = "/jogo?msg=C";
+					}else{
+						var segundos = $(this).html(segundos_atuais);
 					}
 				});
-
 				timerId = setTimeout('cronometro()', 1000);
 			}
+
 		</script>
 
 	</head>
@@ -83,33 +81,33 @@
 
 	    <div class="container">
 
-	    	<% if(msg == 'A') {%>
-	    		<div class="alert alert-danger" id="msg">
-	    			<strong>Operação inválida, verifique se todos os campos foram informados!</strong>
-	    		</div>
-	    	<% } %>
+			<% if(msg == 'A'){ %>
+				<div class="alert alert-danger" id="msg">
+					<strong>Operação Inválida, verifique se todos os campos foram informados!</strong>
+				</div>
+			<% } %>
 
-	    	<% if(msg == 'B') {%>
-	    		<div class="alert alert-info" id="msg">
-	    			<strong>Ação realizada com sucesso!</strong>
-	    		</div>
-	    	<% } %>
+			<% if(msg == 'B'){ %>
+				<div class="alert alert-info" id="msg">
+					<strong>Ação realizada com sucesso!</strong>
+				</div>
+			<% } %>
 
-	    	<% if(msg == 'C') {%>
-	    		<div class="alert alert-info" id="msg">
-	    			<strong>Senhor, a atividade ordenada foi finalizada!</strong>
-	    		</div>
-	    	<% } %>
+			<% if(msg == 'C'){ %>
+				<div class="alert alert-info" id="msg">
+					<strong>Senhor, a atividade ordenada foi finalizada!</strong>
+				</div>
+			<% } %>
 
-	    	<% if(msg == 'D') {%>
-	    		<div class="alert alert-info" id="msg">
-	    			<strong>Senhor, sua ordem foi revogada!</strong>
-	    		</div>
-	    	<% } %>
+			<% if(msg == 'D'){ %>
+				<div class="alert alert-info" id="msg">
+					<strong>Senhor, sua ordem foi revogada!</strong>
+				</div>
+			<% } %>
 	    	
 			<div class="row">
 	    		<div class="col-sm-3 casa">
-					<img src="images/casa_<%=img_casa%>.jpg" />
+					<img src="images/casa_<%= img_casa %>.jpg" />
 				</div>
 
 	    		<div class="col-sm-9">
@@ -140,7 +138,7 @@
 			<div class="row">
 				<div class="col-sm-3"></div>
 				<div class="col-sm-9">
-					<div class="acoes" id="acoes">Senhor, o que deseja fazer hoje?</div>					
+					<div class="acoes" id="acoes"></div>					
 				</div>
 			</div>
 			
@@ -151,7 +149,7 @@
 			
 				<div class="row">
 					<div class="col-sm-1">
-						<img src="images/outros/suditos.jpg" title="Aldeões" alt="Aldeões" id="btn_suditos"/>
+						<img src="images/outros/suditos.jpg" title="Aldeões" alt="Aldeões" id="btn_suditos"	/>
 						<span><%=jogo.suditos%></span>
 					</div>
 					

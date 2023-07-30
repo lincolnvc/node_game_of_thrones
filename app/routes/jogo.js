@@ -22,4 +22,5 @@ module.exports = function(application){
 	application.get('/revogar_acao', function(req, res){
 		application.app.controllers.jogo.revogar_acao(application, req, res);
 	});
+	
 }
